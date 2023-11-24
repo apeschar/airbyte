@@ -381,7 +381,7 @@ class SimpleRetriever(Retriever):
         response: Optional[requests.Response],
         stream_state: Mapping[str, Any],
         stream_slice: Optional[Mapping[str, Any]],
-        records_schema: Optional[Mapping[str, Any]] = None
+        records_schema: Optional[Mapping[str, Any]] = None,
     ) -> Iterable[StreamData]:
         yield from self._parse_response(
             response,
