@@ -13,7 +13,6 @@ logger: logging.Logger = logging.getLogger("airbyte")
 
 
 class SchemaTypes:
-
     string: Dict = {"type": ["null", "string"]}
 
     number: Dict = {"type": ["null", "number"]}
@@ -83,6 +82,12 @@ class SchemaHelpers:
     @staticmethod
     def clean_name(name_str: str) -> str:
         return name_str.replace(" ", "_").lower().strip()
+
+    @staticmethod
+    def clean_value(value):
+        if value == {"specialValue": "NaN"} or value == {"specialValue": "Infinity"}:
+            return None
+        return value
 
     @staticmethod
     def get_json_schema(table: Dict[str, Any]) -> Dict[str, str]:

@@ -170,7 +170,7 @@ class AirtableStream(HttpStream, ABC):
                     "_airtable_id": record.get("id"),
                     "_airtable_created_time": record.get("createdTime"),
                     "_airtable_table_name": self.table_name,
-                    **{SchemaHelpers.clean_name(k): v for k, v in data.items()},
+                    **{SchemaHelpers.clean_name(k): SchemaHelpers.clean_value(v) for k, v in data.items()},
                 }
 
     def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
