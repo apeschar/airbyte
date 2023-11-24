@@ -32,18 +32,13 @@ import java.util.Map;
 import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.containers.Network;
-import uk.org.webcompere.systemstubs.environment.EnvironmentVariables;
-import uk.org.webcompere.systemstubs.jupiter.SystemStub;
-import uk.org.webcompere.systemstubs.jupiter.SystemStubsExtension;
 
 class MySqlStrictEncryptJdbcSourceAcceptanceTest extends MySqlSslJdbcSourceAcceptanceTest {
 
   private static final SshBastionContainer bastion = new SshBastionContainer();
   private static final Network network = Network.newNetwork();
-
 
   @BeforeEach
   @Override
@@ -64,7 +59,6 @@ class MySqlStrictEncryptJdbcSourceAcceptanceTest extends MySqlSslJdbcSourceAccep
         SshHelpers.injectSshIntoSpec(Jsons.deserialize(MoreResources.readResource("expected_cloud_spec.json"), ConnectorSpecification.class));
     assertEquals(expected, actual);
   }
-
 
   @Test
   void testStrictSSLUnsecuredNoTunnel() throws Exception {
@@ -181,6 +175,5 @@ class MySqlStrictEncryptJdbcSourceAcceptanceTest extends MySqlSslJdbcSourceAccep
       bastion.stopAndClose();
     }
   }
-
 
 }
